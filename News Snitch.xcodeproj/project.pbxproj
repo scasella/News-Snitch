@@ -16,7 +16,8 @@
 		8849FEBD1C30A4CF00EAB44B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8849FEBC1C30A4CF00EAB44B /* Models.swift */; };
 		8849FEF81C30BCFA00EAB44B /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8849FEF71C30BCFA00EAB44B /* SummaryViewController.swift */; };
 		88D9625F1C31FA320014541E /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D9625E1C31FA320014541E /* AKPickerView.swift */; };
-		88E6931A1C321FAA00F584DF /* LaunchBG2.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E693191C321FAA00F584DF /* LaunchBG2.png */; };
+		88E6931C1C32297700F584DF /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E6931B1C32297700F584DF /* iAd.framework */; };
+		88E6931E1C322A3A00F584DF /* LaunchBG3.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E6931D1C322A3A00F584DF /* LaunchBG3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +33,8 @@
 		8849FEF71C30BCFA00EAB44B /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		88D9625D1C31FA320014541E /* AKPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKPickerView.h; sourceTree = "<group>"; };
 		88D9625E1C31FA320014541E /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
-		88E693191C321FAA00F584DF /* LaunchBG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchBG2.png; sourceTree = "<group>"; };
+		88E6931B1C32297700F584DF /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		88E6931D1C322A3A00F584DF /* LaunchBG3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchBG3.png; path = "../../untitled folder/LaunchBG3.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E6931C1C32297700F584DF /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +52,7 @@
 		8849FE9A1C30944D00EAB44B = {
 			isa = PBXGroup;
 			children = (
+				88E6931B1C32297700F584DF /* iAd.framework */,
 				88D9625C1C31FA210014541E /* AKPickerView */,
 				8849FEA51C30944D00EAB44B /* News Snitch */,
 				8849FEA41C30944D00EAB44B /* Products */,
@@ -67,7 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				8849FEBA1C309EFE00EAB44B /* viewPort2.png */,
-				88E693191C321FAA00F584DF /* LaunchBG2.png */,
+				88E6931D1C322A3A00F584DF /* LaunchBG3.png */,
 				8849FEA61C30944D00EAB44B /* AppDelegate.swift */,
 				8849FEA81C30944D00EAB44B /* ViewController.swift */,
 				8849FEF71C30BCFA00EAB44B /* SummaryViewController.swift */,
@@ -147,9 +151,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E6931E1C322A3A00F584DF /* LaunchBG3.png in Resources */,
 				8849FEB11C30944D00EAB44B /* LaunchScreen.storyboard in Resources */,
 				8849FEBB1C309EFE00EAB44B /* viewPort2.png in Resources */,
-				88E6931A1C321FAA00F584DF /* LaunchBG2.png in Resources */,
 				8849FEAE1C30944D00EAB44B /* Assets.xcassets in Resources */,
 				8849FEAC1C30944D00EAB44B /* Main.storyboard in Resources */,
 			);

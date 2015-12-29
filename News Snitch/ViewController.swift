@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import iAd
+
 var linkArray = [String]()
 var titleArray = [String]()
 var providerArray = [String]()
@@ -14,7 +16,7 @@ var teaserArray = [String]()
 
 var linkObj = 0
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, AKPickerViewDataSource, AKPickerViewDelegate {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ADBannerViewDelegate, AKPickerViewDataSource, AKPickerViewDelegate, UIGestureRecognizerDelegate {
     
     let titles = ["Trending", "U.S.", "Business", "Tech", "Media", "Health", "Sports", "Science"]
 
@@ -22,10 +24,39 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var picker: UIPickerView?
     @IBOutlet weak var teaserLabel: UILabel?
     @IBOutlet weak var goButton: UIButton?
+    @IBOutlet weak var bannerAd: ADBannerView!
+    @IBOutlet weak var helperLabel: UILabel?
+
+    
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        UIView.animateWithDuration(0.5) { () -> Void in
+            self.bannerAd.alpha = 1
+        }
+    }
+    
+    func bannerViewActionShouldBegin(banner: ADBannerView!, willLeaveApplication willLeave: Bool) -> Bool {
+        return true
+    }
+    
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+        
+        UIView.animateWithDuration(0.5) { () -> Void in
+            self.bannerAd.alpha = 0
+        }
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self, action: "morePressed")
+        self.picker!.addGestureRecognizer(tap)
+        tap.delegate = self
+    
+        bannerAd.delegate = self
+        bannerAd.alpha = 0
+        self.canDisplayBannerAds = true
+        
         downloadHeadlines(newsDict["Trending"]!)
         picker?.showsSelectionIndicator = false
         goButton!.layer.cornerRadius = 12.0
@@ -33,11 +64,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         hPickerView!.delegate = self
         hPickerView!.dataSource = self
         
-        hPickerView!.font = UIFont.systemFontOfSize(14.0)
-        hPickerView!.highlightedFont = UIFont.systemFontOfSize(14.0)
+        hPickerView!.font = UIFont.systemFontOfSize(16.0)
+        hPickerView!.highlightedFont = UIFont.systemFontOfSize(16.0)
         hPickerView!.pickerViewStyle = .Flat
         hPickerView!.maskDisabled = false
         hPickerView!.reloadData()
+    }
+    
+    
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     
@@ -62,9 +99,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        hPickerView!.alpha = 0.8
+        helperLabel!.alpha = 0.0
+        hPickerView!.alpha = 0.9
         UIView.animateWithDuration(5.0) { () -> Void in
-            self.hPickerView!.alpha = 0.2
+            self.hPickerView!.alpha = 0.4
         }
           downloadHeadlines(newsDict["\(titles[item])"]!)
     }
@@ -109,12 +147,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        helperLabel!.alpha = 0.0
         teaserLabel!.text = teaserArray[row]
         teaserLabel!.alpha = 0.0
         UIView.animateWithDuration(0.65, delay: 0.0, options: [.CurveEaseOut], animations: {
         self.teaserLabel!.alpha = 0.75
 
         }, completion: nil)
+        UIView.animateWithDuration(15.0) { () -> Void in
+            self.helperLabel!.alpha = 0.5
+        }
     
     }
     
@@ -142,7 +184,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         providerArray.removeAll()
         teaserArray.removeAll()
         
-        picker!.reloadAllComponents()
+        //picker!.reloadAllComponents()
         teaserLabel!.alpha = 0.3
         teaserLabel!.text = "Gathering headlines..."
         
@@ -182,11 +224,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                         
                         dispatch_sync(dispatch_get_main_queue()){
                             
-                            self.picker?.userInteractionEnabled = true
-                            self.picker?.reloadAllComponents()
+                            self.picker!.userInteractionEnabled = true
+                            self.picker!.multipleTouchEnabled = true 
+                            self.picker!.reloadAllComponents()
                             self.teaserLabel!.text = teaserArray[0]
-                            self.teaserLabel!.alpha = 0.8
-                            self.picker?.selectRow(0, inComponent: 0, animated: true)
+                            self.teaserLabel!.alpha = 0.9
+                            self.helperLabel!.alpha = 0.0
+                            UIView.animateWithDuration(15.0, animations: { () -> Void in
+                                self.helperLabel!.alpha = 0.5
+                            })
+                            self.picker!.selectRow(0, inComponent: 0, animated: true)
                         }
                         
                         // dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {

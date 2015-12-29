@@ -17,8 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hs8-sZ-eh3">
-                                <rect key="frame" x="31" y="186" width="312" height="216"/>
+                            <pickerView multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hs8-sZ-eh3">
+                                <rect key="frame" x="31" y="196" width="312" height="216"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Nf4-Te-AXw"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ZEC-36-Y5c"/>
@@ -38,12 +39,23 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="News Snitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bR3-yr-5zB">
                                 <rect key="frame" x="60" y="20" width="254" height="64"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view alpha="0.20000000000000001" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Mf-Bc-S0I" customClass="AKPickerView" customModule="News_Snitch" customModuleProvider="target">
-                                <rect key="frame" x="20" y="445" width="335" height="52"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzP-id-xka">
+                                <rect key="frame" x="7" y="559" width="82" height="50"/>
+                                <color key="backgroundColor" red="0.2156862745" green="0.2156862745" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <state key="normal" title="More">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="morePressed" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="7R5-JV-ZfL"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Mf-Bc-S0I" customClass="AKPickerView" customModule="News_Snitch" customModuleProvider="target">
+                                <rect key="frame" x="20" y="412" width="335" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
@@ -55,24 +67,27 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzP-id-xka">
-                                <rect key="frame" x="144" y="505" width="86" height="51"/>
-                                <color key="backgroundColor" red="0.2156862745" green="0.2156862745" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                <state key="normal" title="More">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="suH-WL-zvJ">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <connections>
-                                    <action selector="morePressed" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="7R5-JV-ZfL"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Gqg-1n-Ma7"/>
                                 </connections>
-                            </button>
+                            </adBannerView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap headline to see more" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Oa-pI-K6F">
+                                <rect key="frame" x="67" y="577" width="241" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="bannerAd" destination="suH-WL-zvJ" id="G3w-tx-AS9"/>
                         <outlet property="goButton" destination="uzP-id-xka" id="94h-hY-WMJ"/>
                         <outlet property="hPickerView" destination="7Mf-Bc-S0I" id="Ilh-1h-7mH"/>
+                        <outlet property="helperLabel" destination="4Oa-pI-K6F" id="opZ-rL-LoU"/>
                         <outlet property="picker" destination="Hs8-sZ-eh3" id="0IR-X7-rCk"/>
                         <outlet property="teaserLabel" destination="QHb-61-73U" id="JaQ-mn-20d"/>
                         <segue destination="XSO-vp-4fE" kind="presentation" identifier="toSummaryView" modalPresentationStyle="overCurrentContext" id="IhL-YP-Qez"/>
@@ -121,7 +136,7 @@
                                                 <color key="titleColor" red="0.23284844702241669" green="0.62563807019815409" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" id="xRX-3V-k1L"/>
+                                                <segue destination="BYZ-38-t0r" kind="show" animates="NO" id="xRX-3V-k1L"/>
                                             </connections>
                                         </button>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Rqy-eT-y8m">
@@ -129,7 +144,7 @@
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="News Snitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4V-SZ-HQo">
                                             <rect key="frame" x="60" y="20" width="254" height="64"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="21"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
                                             <color key="textColor" red="0.63898753156565657" green="0.63898753156565657" blue="0.63898753156565657" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
