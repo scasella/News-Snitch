@@ -14,25 +14,61 @@ var teaserArray = [String]()
 
 var linkObj = 0
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
-    @IBOutlet var picker: UIPickerView?
-    @IBOutlet var teaserLabel: UILabel?
-    @IBOutlet var goButton: UIButton?
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, AKPickerViewDataSource, AKPickerViewDelegate {
     
+    let titles = ["Trending", "U.S.", "Business", "Tech", "Media", "Health", "Sports", "Science"]
+
+    @IBOutlet weak var hPickerView: AKPickerView?
+    @IBOutlet weak var picker: UIPickerView?
+    @IBOutlet weak var teaserLabel: UILabel?
+    @IBOutlet weak var goButton: UIButton?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadHeadlines(newsDict["Trending"]!)
         picker?.showsSelectionIndicator = false
         goButton!.layer.cornerRadius = 12.0
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        hPickerView!.delegate = self
+        hPickerView!.dataSource = self
+        
+        hPickerView!.font = UIFont.systemFontOfSize(14.0)
+        hPickerView!.highlightedFont = UIFont.systemFontOfSize(14.0)
+        hPickerView!.pickerViewStyle = .Flat
+        hPickerView!.maskDisabled = false
+        hPickerView!.reloadData()
     }
+    
+    
     
     @IBAction func morePressed() {
      linkObj = teaserArray.indexOf(teaserLabel!.text!)!
         performSegueWithIdentifier("toSummaryView", sender: self)
     }
+    
+    
+    
+    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
+        return self.titles.count
+    }
+    
+    
+    
+    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
+        return self.titles[item]
+    }
+    
+    
+    
+    func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
+        hPickerView!.alpha = 0.8
+        UIView.animateWithDuration(5.0) { () -> Void in
+            self.hPickerView!.alpha = 0.2
+        }
+          downloadHeadlines(newsDict["\(titles[item])"]!)
+    }
+    
     
 
     override func didReceiveMemoryWarning() {
@@ -98,6 +134,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     func downloadHeadlines(url: String) {
+        
+        picker!.userInteractionEnabled = false
+        
+        linkArray.removeAll()
+        titleArray.removeAll()
+        providerArray.removeAll()
+        teaserArray.removeAll()
+        
+        picker!.reloadAllComponents()
+        teaserLabel!.alpha = 0.3
+        teaserLabel!.text = "Gathering headlines..."
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            
         let request = NSURLRequest(URL: NSURL(string: url)!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) {
@@ -132,9 +182,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                         
                         dispatch_sync(dispatch_get_main_queue()){
                             
+                            self.picker?.userInteractionEnabled = true
                             self.picker?.reloadAllComponents()
                             self.teaserLabel!.text = teaserArray[0]
-                            
+                            self.teaserLabel!.alpha = 0.8
+                            self.picker?.selectRow(0, inComponent: 0, animated: true)
                         }
                         
                         // dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -151,8 +203,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         task.resume()
-
+        })
     }
-
+    
 }
 

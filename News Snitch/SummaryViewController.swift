@@ -26,8 +26,6 @@ class SummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        blurView.layer.cornerRadius = 16.0
-        blurView.clipsToBounds = true 
         downloadData(linkObj, titleLabel: titleLabel!, summaryField: summaryField!, loadingView: loadingView!)
     }
     
