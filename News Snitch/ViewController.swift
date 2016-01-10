@@ -73,6 +73,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+    
+    
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
@@ -100,10 +106,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
         helperLabel!.alpha = 0.0
-        hPickerView!.alpha = 0.9
+        /*hPickerView!.alpha = 0.9
         UIView.animateWithDuration(5.0) { () -> Void in
             self.hPickerView!.alpha = 0.4
-        }
+        }*/
           downloadHeadlines(newsDict["\(titles[item])"]!)
     }
     
