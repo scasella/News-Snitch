@@ -31,6 +31,7 @@ func downloadData(linkObj: Int, titleLabel: UILabel, summaryField: UITextView, l
                         let summary = item["summarytext"]!
                         
                         dispatch_sync(dispatch_get_main_queue()){
+                        
                             titleLabel.text = titleArray[linkObj]
                             summaryField.text = "\(summary!)"
                             summaryField.textColor = UIColor.blackColor()

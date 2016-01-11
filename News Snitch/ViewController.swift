@@ -49,9 +49,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         let tap = UITapGestureRecognizer(target: self, action: "morePressed")
         self.picker!.addGestureRecognizer(tap)
-        tap.delegate = self
+        tap.delegate = self */
     
         bannerAd.delegate = self
         bannerAd.alpha = 0
@@ -59,7 +60,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         downloadHeadlines(newsDict["Trending"]!)
         picker?.showsSelectionIndicator = false
-        goButton!.layer.cornerRadius = 12.0
+        goButton!.layer.cornerRadius = 8.0
         
         hPickerView!.delegate = self
         hPickerView!.dataSource = self
@@ -105,7 +106,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        helperLabel!.alpha = 0.0
+        //helperLabel!.alpha = 0.0
         /*hPickerView!.alpha = 0.9
         UIView.animateWithDuration(5.0) { () -> Void in
             self.hPickerView!.alpha = 0.4
@@ -153,16 +154,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        helperLabel!.alpha = 0.0
+        //helperLabel!.alpha = 0.0
         teaserLabel!.text = teaserArray[row]
         teaserLabel!.alpha = 0.0
         UIView.animateWithDuration(0.65, delay: 0.0, options: [.CurveEaseOut], animations: {
         self.teaserLabel!.alpha = 0.75
 
         }, completion: nil)
-        UIView.animateWithDuration(15.0) { () -> Void in
+        /*UIView.animateWithDuration(15.0) { () -> Void in
             self.helperLabel!.alpha = 0.5
-        }
+        }*/
     
     }
     
@@ -185,11 +186,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         picker!.userInteractionEnabled = false
         
-        linkArray.removeAll()
-        titleArray.removeAll()
-        providerArray.removeAll()
-        teaserArray.removeAll()
-        
         //picker!.reloadAllComponents()
         teaserLabel!.alpha = 0.3
         teaserLabel!.text = "Gathering headlines..."
@@ -207,6 +203,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 do { let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? NSDictionary
                     
                     if let items = dict!["results"] as? NSArray {
+                        
+                        linkArray.removeAll()
+                        titleArray.removeAll()
+                        providerArray.removeAll()
+                        teaserArray.removeAll()
                         
                         for item in items {
                             
@@ -235,10 +236,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                             self.picker!.reloadAllComponents()
                             self.teaserLabel!.text = teaserArray[0]
                             self.teaserLabel!.alpha = 0.9
-                            self.helperLabel!.alpha = 0.0
+                            /*self.helperLabel!.alpha = 0.0
                             UIView.animateWithDuration(15.0, animations: { () -> Void in
                                 self.helperLabel!.alpha = 0.5
-                            })
+                            })*/
                             self.picker!.selectRow(0, inComponent: 0, animated: true)
                         }
                         
