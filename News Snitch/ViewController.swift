@@ -49,10 +49,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
+        
         let tap = UITapGestureRecognizer(target: self, action: "morePressed")
         self.picker!.addGestureRecognizer(tap)
-        tap.delegate = self */
+        tap.delegate = self 
     
         bannerAd.delegate = self
         bannerAd.alpha = 0
@@ -65,8 +65,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         hPickerView!.delegate = self
         hPickerView!.dataSource = self
         
-        hPickerView!.font = UIFont.systemFontOfSize(16.0)
-        hPickerView!.highlightedFont = UIFont.systemFontOfSize(16.0)
+        hPickerView!.font = UIFont.systemFontOfSize(18.0)
+        hPickerView!.highlightedFont = UIFont.systemFontOfSize(20.0)
         hPickerView!.pickerViewStyle = .Flat
         hPickerView!.maskDisabled = false
         hPickerView!.reloadData()

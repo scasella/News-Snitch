@@ -36,6 +36,7 @@ func downloadData(linkObj: Int, titleLabel: UILabel, summaryField: UITextView, l
                             summaryField.text = "\(summary!)"
                             summaryField.textColor = UIColor.blackColor()
                             summaryField.textAlignment = .Justified
+                            summaryField.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
                             
                             linkURL = linkArray[linkObj]
                           
