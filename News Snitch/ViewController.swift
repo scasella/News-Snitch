@@ -28,22 +28,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var helperLabel: UILabel?
 
     
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
+    /*func bannerViewDidLoadAd(banner: ADBannerView!) {
         UIView.animateWithDuration(0.5) { () -> Void in
             self.bannerAd.alpha = 1
         }
-    }
+    }*/
     
     func bannerViewActionShouldBegin(banner: ADBannerView!, willLeaveApplication willLeave: Bool) -> Bool {
         return true
     }
     
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+    /*func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
         
         UIView.animateWithDuration(0.5) { () -> Void in
             self.bannerAd.alpha = 0
         }
-    }
+    }*/
 
     
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         tap.delegate = self 
     
         bannerAd.delegate = self
-        bannerAd.alpha = 0
+        //bannerAd.alpha = 0
         self.canDisplayBannerAds = true
         
         downloadHeadlines(newsDict["Trending"]!, hPicker: hPickerView!)
@@ -65,8 +65,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         hPickerView!.delegate = self
         hPickerView!.dataSource = self
         
-        hPickerView!.font = UIFont.systemFontOfSize(16.0)
-        hPickerView!.highlightedFont = UIFont.systemFontOfSize(18.0)
+        hPickerView!.font = UIFont.boldSystemFontOfSize(18.0)
+        hPickerView!.highlightedFont = UIFont.boldSystemFontOfSize(18.0)
         hPickerView!.pickerViewStyle = .Flat
         hPickerView!.maskDisabled = false
         hPickerView!.reloadData()
