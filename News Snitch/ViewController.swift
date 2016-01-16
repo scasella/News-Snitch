@@ -58,15 +58,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         bannerAd.alpha = 0
         self.canDisplayBannerAds = true
         
-        downloadHeadlines(newsDict["Trending"]!)
+        downloadHeadlines(newsDict["Trending"]!, hPicker: hPickerView!)
         picker?.showsSelectionIndicator = false
         goButton!.layer.cornerRadius = 8.0
         
         hPickerView!.delegate = self
         hPickerView!.dataSource = self
         
-        hPickerView!.font = UIFont.systemFontOfSize(18.0)
-        hPickerView!.highlightedFont = UIFont.systemFontOfSize(20.0)
+        hPickerView!.font = UIFont.systemFontOfSize(16.0)
+        hPickerView!.highlightedFont = UIFont.systemFontOfSize(18.0)
         hPickerView!.pickerViewStyle = .Flat
         hPickerView!.maskDisabled = false
         hPickerView!.reloadData()
@@ -87,6 +87,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func morePressed() {
+        self.canDisplayBannerAds = false
      linkObj = teaserArray.indexOf(teaserLabel!.text!)!
         performSegueWithIdentifier("toSummaryView", sender: self)
     }
@@ -111,7 +112,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         UIView.animateWithDuration(5.0) { () -> Void in
             self.hPickerView!.alpha = 0.4
         }*/
-          downloadHeadlines(newsDict["\(titles[item])"]!)
+        downloadHeadlines(newsDict["\(titles[item])"]!, hPicker: hPickerView!)
     }
     
     
@@ -182,10 +183,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     
-    func downloadHeadlines(url: String) {
+    func downloadHeadlines(url: String, hPicker: AKPickerView) {
         
         picker!.userInteractionEnabled = false
-        
+        hPicker.userInteractionEnabled = false
         //picker!.reloadAllComponents()
         teaserLabel!.alpha = 0.3
         teaserLabel!.text = "Gathering headlines..."
@@ -231,15 +232,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                         
                         dispatch_sync(dispatch_get_main_queue()){
                             
-                            self.picker!.userInteractionEnabled = true
-                            self.picker!.multipleTouchEnabled = true 
-                            self.picker!.reloadAllComponents()
                             self.teaserLabel!.text = teaserArray[0]
                             self.teaserLabel!.alpha = 0.9
                             /*self.helperLabel!.alpha = 0.0
                             UIView.animateWithDuration(15.0, animations: { () -> Void in
                                 self.helperLabel!.alpha = 0.5
                             })*/
+                            
+                            hPicker.userInteractionEnabled = true
+                            hPicker.multipleTouchEnabled = true
+                            
+                            self.picker!.userInteractionEnabled = true
+                            self.picker!.multipleTouchEnabled = true
+                            self.picker!.reloadAllComponents()
                             self.picker!.selectRow(0, inComponent: 0, animated: true)
                         }
                         
